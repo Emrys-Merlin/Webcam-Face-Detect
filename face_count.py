@@ -50,7 +50,7 @@ def get_faces(frame):
         gray,
         scaleFactor=1.1,
         minNeighbors=5,
-        minSize=(30, 30)
+        minSnize=(30, 30)
     )
 
 
@@ -97,10 +97,11 @@ while True:
                     myscreen.refresh()
 
     ant_faces = nf
-
-    if myscreen.getch() == ord('q'):
+    c = myscreen.getch()
+    if c == ord('q'):
         break
-
+    elif c == curses.KEY_RESIZE:
+        myscreen.resize()
 
 # When everything is done, release the capture
 video_capture.release()
