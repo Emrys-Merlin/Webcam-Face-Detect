@@ -33,6 +33,7 @@ if os.path.exists(path):
 
 # ncurses set up
 myscreen = curses.initscr()
+curses.noecho()
 myscreen.border(0)
 y, x = myscreen.getmaxyx()
 posr = y // 2
@@ -102,15 +103,18 @@ while True:
         break
     elif c == curses.KEY_RESIZE:
         y, x = myscreen.getmaxyx()
-        myscreen.resize(x, y)
+        myscreen.resize(y, x)
+        myscreen.clear()
+        myscreen.border(0)
         myscreen.refresh()
         posr = y // 2
         posc = (x - len(message + str(gcount))) // 2
         myscreen.addstr(posr, posc, message)
+        myscreen.addstr(posr, posc + len(message), str(gcount))
         myscreen.refresh()
 
 
 # When everything is done, release the capture
+curses.endwin()
 video_capture.release()
 cv2.destroyAllWindows()
-myscreen.endwin()
