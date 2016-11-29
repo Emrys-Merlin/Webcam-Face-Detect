@@ -5,7 +5,7 @@ import cPickle as pickle
 import os
 
 from imutils.video import WebcamVideoStream
-from time import sleep
+# from time import sleep
 
 cascPath = sys.argv[1]
 faceCascade = cv2.CascadeClassifier(cascPath)
