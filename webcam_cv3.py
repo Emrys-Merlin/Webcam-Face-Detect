@@ -3,23 +3,24 @@ import sys
 import logging as log
 import datetime as dt
 
-from time import sleep
+from imutils.video import WebcamVideoStream
+# from time import sleep
 
 cascPath = sys.argv[1]
 faceCascade = cv2.CascadeClassifier(cascPath)
 log.basicConfig(filename='webcam.log',level=log.INFO)
 
-video_capture = cv2.VideoCapture(0)
+video_capture = WebcamVideoStream(src=0).start()
 anterior = 0
 
 while True:
-    if not video_capture.isOpened():
-        print('Unable to load camera.')
-        sleep(5)
-        pass
+    # if not video_capture.isOpened():
+    #     print('Unable to load camera.')
+    #     sleep(5)
+    #     pass
 
     # Capture frame-by-frame
-    ret, frame = video_capture.read()
+    frame = video_capture.read()
 
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
@@ -45,5 +46,5 @@ while True:
     cv2.imshow('Video', frame)
 
 # When everything is done, release the capture
-video_capture.release()
+video_capture.stop()
 cv2.destroyAllWindows()
