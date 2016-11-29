@@ -100,8 +100,6 @@ while True:
     c = myscreen.getch()
     if c == ord('q'):
         break
-    elif c == curses.KEY_RESIZE:
-        myscreen.resize()
 
 
 # When everything is done, release the capture
