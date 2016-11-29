@@ -100,6 +100,13 @@ while True:
     c = myscreen.getch()
     if c == ord('q'):
         break
+    elif c == curses.KEY_RESIZE:
+        y, x = myscreen.getmaxyx()
+        myscreen.resize(x, y)
+        posr = y // 2
+        posc = (x - len(message + str(gcount))) // 2
+        myscreen.addstr(posr, posc, message)
+        myscreen.refresh
 
 
 # When everything is done, release the capture
