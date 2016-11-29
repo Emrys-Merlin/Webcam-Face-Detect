@@ -16,7 +16,7 @@ ant_faces = []
 # count as the same head
 eps = 50
 # How often has a head to be detected, before counting it.
-debounce = 10
+debounce = 5
 
 # Message shown in front of the count
 message = "Blicke gefangen: "
@@ -93,11 +93,10 @@ while True:
                     gcount += 1
                     with open(path, 'w') as pickle_handle:
                         pickle.dump(gcount, pickle_handle)
+                    myscreen.addstr(posr, posc + len(message), str(gcount))
+                    myscreen.refresh()
 
     ant_faces = nf
-
-    myscreen.addstr(posr, posc + len(message), str(gcount))
-    myscreen.refresh()
 
     if myscreen.getch() == ord('q'):
         break
