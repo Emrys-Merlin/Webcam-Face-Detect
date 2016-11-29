@@ -4,12 +4,13 @@ import curses
 import cPickle as pickle
 import os
 
+from imutils.video import WebcamVideoStream
 from time import sleep
 
 cascPath = sys.argv[1]
 faceCascade = cv2.CascadeClassifier(cascPath)
 
-video_capture = cv2.VideoCapture(0)
+video_capture = WebcamVideoStream(src=0).start()
 ant_faces = []
 
 # How far is a head allowed to have wandered (and/or shrunk/grown) to still
@@ -66,13 +67,13 @@ def show_stream(frame, faces):
 
 while True:
 
-    if not video_capture.isOpened():
-        print('Unable to load camera.')
-        sleep(5)
-        pass
+    # if not video_capture.isOpened():
+    #     print('Unable to load camera.')
+    #     sleep(5)
+    #     pass
 
     # Capture frame-by-frame
-    ret, frame = video_capture.read()
+    frame = video_capture.read()
 
     faces = get_faces(frame)
 
@@ -116,5 +117,5 @@ while True:
 
 # When everything is done, release the capture
 curses.endwin()
-video_capture.release()
+video_capture.stop()
 cv2.destroyAllWindows()
