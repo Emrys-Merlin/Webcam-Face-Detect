@@ -103,10 +103,11 @@ while True:
     elif c == curses.KEY_RESIZE:
         y, x = myscreen.getmaxyx()
         myscreen.resize(x, y)
+        myscreen.refresh()
         posr = y // 2
         posc = (x - len(message + str(gcount))) // 2
         myscreen.addstr(posr, posc, message)
-        myscreen.refresh
+        myscreen.refresh()
 
 
 # When everything is done, release the capture
